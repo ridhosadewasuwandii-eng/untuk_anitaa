@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Untuk Anita 💌</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffd6e5, #ffb6cc, #ffcce0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+
+/* =====================
+   HATI BACKGROUND
+===================== */
+
+.hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    color: white;
+    opacity: 0.7;
+    animation: jatuh linear infinite;
+}
+
+@keyframes jatuh {
+
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+
+}
+
+
+/* =====================
+   AMPLOP
+===================== */
+
+#suratAwal {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.envelope-container {
+    position: relative;
+    width: 330px;
+    height: 230px;
+    cursor: pointer;
+}
+
+.envelope {
+    position: absolute;
+    bottom: 0;
+    width: 330px;
+    height: 210px;
+    background: #ff78a5;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(180,40,90,0.35);
+    overflow: hidden;
+}
+
+
+/* =====================
+   SURAT DALAM AMPLOP
+===================== */
+
+.letter {
+    position: absolute;
+    width: 270px;
+    height: 180px;
+    background: #fff8fb;
+    left: 30px;
+    top: 35px;
+    border-radius: 10px;
+    z-index: 2;
+
+    /* Tulisan diturunkan */
+    padding-top: 70px;
+
+    text-align: center;
+
+    transition: 1.2s ease;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+}
+
+.letter h2 {
+    color: #e63970;
+    font-size: 24px;
+}
+
+.letter p {
+    color: #b84d70;
+    margin-top: 10px;
+}
+
+
+/* =====================
+   TUTUP AMPLOP
+===================== */
+
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 165px solid transparent;
+    border-right: 165px solid transparent;
+    border-top: 115px solid #ff4f88;
+
+    transform-origin: top;
+    z-index: 5;
+    transition: 0.8s ease;
+}
+
+
+/* =====================
+   DEPAN AMPLOP
+===================== */
+
+.front {
+    position: absolute;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 165px solid #ff8eb5;
+    border-right: 165px solid #ff8eb5;
+    border-top: 110px solid transparent;
+
+    z-index: 4;
+}
+
+
+/* =====================
+   ANIMASI BUKA AMPLOP
+===================== */
+
+.envelope-container.open .flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-container.open .letter {
+    transform: translateY(-170px);
+    z-index: 3;
+}
+
+.tulisanKlik {
+    margin-top: 35px;
+    color: #b83362;
+    font-weight: bold;
+}
+
+
+/* =====================
+   ISI SURAT
+===================== */
+
+#isiSurat {
+    display: none;
+    width: 100%;
+    max-width: 650px;
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.halaman {
+    background: rgba(255,255,255,0.92);
+    padding: 35px 28px;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(180,40,90,0.25);
+    min-height: 500px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    animation: muncul 0.8s ease;
+}
+
+@keyframes muncul {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+h1 {
+    color: #e63970;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.isi {
+    color: #633343;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 30px;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 30px;
+
+    background: linear-gradient(135deg, #ff4f81, #ff8fb0);
+
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.nomor {
+    text-align: center;
+    margin-top: 20px;
+    color: #c46a88;
+}
+
+
+/* =====================
+   HALAMAN PENUTUP
+===================== */
+
+#penutup {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 20;
+
+    background: linear-gradient(
+        135deg,
+        #ffb6cc,
+        #ff7ca8,
+        #ffcce0
+    );
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+.penutupIsi {
+    position: relative;
+    z-index: 2;
+
+    padding: 30px;
+
+    animation: munculPenutup 1.5s ease;
+}
+
+.penutupIsi h1 {
+    color: white;
+    font-size: 38px;
+    text-shadow: 0 5px 15px rgba(150,20,70,0.3);
+}
+
+.penutupIsi p {
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+
+/* =====================
+   ANIMASI PENUTUP
+===================== */
+
+@keyframes munculPenutup {
+
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* =====================
+   HATI PENUTUP
+===================== */
+
+.heartEnd {
+    position: absolute;
+    font-size: 25px;
+    animation: naik 5s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes naik {
+
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-150px) scale(1.5);
+        opacity: 0;
+    }
+
+}
+
+
+/* =====================
+   HP
+===================== */
+
+@media(max-width: 500px) {
+
+    .envelope-container {
+        transform: scale(0.85);
+    }
+
+    .halaman {
+        padding: 30px 20px;
+    }
+
+    .isi {
+        font-size: 15px;
+    }
+
+    .penutupIsi h1 {
+        font-size: 30px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================
+     HATI BACKGROUND
+===================== -->
+
+<div class="hearts" id="hearts"></div>
+
+
+<!-- =====================
+     MUSIK
+===================== -->
+
+<audio id="musik" loop>
+    <source src="musik.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- =====================
+     HALAMAN AMPLOP
+===================== -->
+
+<div id="suratAwal">
+
+    <div
+    class="envelope-container"
+    id="amplop"
+    onclick="bukaSurat()">
+
+        <div class="envelope">
+
+            <!-- SURAT DI DALAM AMPLOP -->
+
+            <div class="letter">
+
+                <h2>Untuk Anita 💗</h2>
+
+                <p>Ada sesuatu dari mas...</p>
+
+            </div>
+
+
+            <!-- TUTUP AMPLOP -->
+
+            <div class="flap"></div>
+
+
+            <!-- BAGIAN DEPAN AMPLOP -->
+
+            <div class="front"></div>
+
+        </div>
+
+    </div>
+
+
+    <div class="tulisanKlik">
+        Klik amplopnya 💗
+    </div>
+
+</div>
+
+
+
+<!-- =====================
+     ISI SURAT
+===================== -->
+
+<div id="isiSurat">
+
+
+<!-- HALAMAN 1 -->
+
+<div class="halaman" id="halaman1">
+
+<h1>Halo Anita 👋💗</h1>
+
+<div class="isi">
+
+Halo Anita, gimana kabarnya hari ini? Semoga lu selalu dalam keadaan baik yaa.
+
+<br><br>
+
+Mas cuma mau bilang semoga hari lu berjalan dengan baik dan apa pun yang sedang lu hadapi sekarang bisa lu lewati dengan kuat.
+
+<br><br>
+
+Jangan lupa jaga kesehatan yaa. Jangan terlalu capek dan jangan lupa buat istirahat.
+
+<br><br>
+
+Kalau hari ini terasa berat, semoga besok bisa menjadi hari yang lebih baik.
+
+<br><br>
+
+Pokoknya mas harap lu selalu baik-baik aja dan jangan lupa buat tetap senyum yaa. 💗🌷
+
+</div>
+
+<button onclick="nextPage(2)">
+Lanjut 💌
+</button>
+
+<div class="nomor">
+Halaman 1 dari 3
+</div>
+
+</div>
+
+
+
+<!-- HALAMAN 2 -->
+
+<div
+class="halaman"
+id="halaman2"
+style="display:none;">
+
+<h1>Semangat Ya Anita! 🌸</h1>
+
+<div class="isi">
+
+Mas mau bilang semangat yaa buat lu dalam menjalani sekolah dan semua tugas-tugas yang lu punya.
+
+<br><br>
+
+Mas tahu kadang sekolah bisa melelahkan, tugas bisa banyak, belum lagi kegiatan OSIS dan kegiatan lainnya.
+
+<br><br>
+
+Tapi mas percaya lu adalah orang yang kuat dan bisa melewati semuanya.
+
+<br><br>
+
+Jangan terlalu memaksakan diri yaa, karena lu juga butuh istirahat.
+
+<br><br>
+
+Kalau lu merasa capek atau semuanya terasa berat, coba berhenti sebentar dan tarik napas.
+
+<br><br>
+
+Lu nggak harus selalu kuat setiap saat.
+
+<br><br>
+
+Pelan-pelan aja. Satu tugas diselesaikan satu per satu.
+
+<br><br>
+
+Yang penting lu tetap berusaha dan jangan menyerah.
+
+<br><br>
+
+Mas percaya lu bisa melewati semuanya.
+
+<br><br>
+
+Tetap semangat yaa Anita! 🌷💗
+
+</div>
+
+<button onclick="nextPage(3)">
+Lanjut Lagi 💌
+</button>
+
+<div class="nomor">
+Halaman 2 dari 3
+</div>
+
+</div>
+
+
+
+<!-- HALAMAN 3 -->
+
+<div
+class="halaman"
+id="halaman3"
+style="display:none;">
+
+<h1>Terima Kasih 💗</h1>
+
+<div class="isi">
+
+Terima kasih yaa Anita, karena selama ini lu sudah menjadi orang yang baik.
+
+<br><br>
+
+Terima kasih untuk semua perhatian kecil yang mungkin lu sendiri nggak sadar kalau itu berarti buat mas.
+
+<br><br>
+
+Terima kasih karena lu sudah baik, sudah peduli, sudah mau mendengarkan, dan sudah menjadi diri lu sendiri.
+
+<br><br>
+
+Mas juga mau minta maaf kalau selama ini mas belum bisa menjadi pendengar yang baik.
+
+<br><br>
+
+Maaf kalau kadang mas belum bisa memahami apa yang lu rasakan.
+
+<br><br>
+
+Maaf kalau mas belum bisa selalu ada ketika lu membutuhkan seseorang.
+
+<br><br>
+
+Mas sadar mas masih banyak kekurangan.
+
+<br><br>
+
+Tapi mas benar-benar menghargai semua kebaikan dan perhatian yang sudah lu berikan.
+
+<br><br>
+
+Sekali lagi, terima kasih yaa Anita. 💗
+
+<br><br>
+
+Semoga lu selalu dikelilingi oleh orang-orang yang tulus dan semua impian lu bisa tercapai satu per satu.
+
+<br><br>
+
+Tetap jadi Anita yang baik yaa. 🌷💗
+
+</div>
+
+<button onclick="selesai()">
+Selesai 💌
+</button>
+
+<div class="nomor">
+Halaman 3 dari 3
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================
+     HALAMAN PENUTUP
+===================== -->
+
+<div id="penutup">
+
+    <div class="penutupIsi">
+
+        <h1>
+            Jaga Diri Baik-Baik Ya,<br>
+            Anita 💗
+        </h1>
+
+        <p>
+            Mas selalu berharap hal-hal baik datang ke hidup lu 🌷
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================
+     JAVASCRIPT
+===================== -->
+
+<script>
+
+
+/* HATI BACKGROUND */
+
+const hearts = document.getElementById("hearts");
+
+
+function buatHati() {
+
+    const heart = document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML = "♥";
+
+    heart.style.left = Math.random() * 100 + "vw";
+
+    heart.style.fontSize = Math.random() * 25 + 15 + "px";
+
+    heart.style.animationDuration =
+    Math.random() * 5 + 5 + "s";
+
+    hearts.appendChild(heart);
+
+
+    setTimeout(function() {
+
+        heart.remove();
+
+    }, 10000);
+
+}
+
+
+setInterval(buatHati, 500);
+
+
+
+/* =====================
+   BUKA AMPLOP
+===================== */
+
+function bukaSurat() {
+
+    let amplop =
+    document.getElementById("amplop");
+
+    let musik =
+    document.getElementById("musik");
+
+
+    amplop.classList.add("open");
+
+
+    musik.play();
+
+
+    setTimeout(function() {
+
+        document
+        .getElementById("suratAwal")
+        .style.display = "none";
+
+
+        document
+        .getElementById("isiSurat")
+        .style.display = "block";
+
+
+    }, 1800);
+
+}
+
+
+
+/* =====================
+   PINDAH HALAMAN
+===================== */
+
+function nextPage(nomor) {
+
+    document
+    .getElementById("halaman1")
+    .style.display = "none";
+
+
+    document
+    .getElementById("halaman2")
+    .style.display = "none";
+
+
+    document
+    .getElementById("halaman3")
+    .style.display = "none";
+
+
+    document
+    .getElementById("halaman" + nomor)
+    .style.display = "flex";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+
+/* =====================
+   HALAMAN SELESAI
+===================== */
+
+function selesai() {
+
+    document
+    .getElementById("isiSurat")
+    .style.display = "none";
+
+
+    let penutup =
+    document.getElementById("penutup");
+
+
+    penutup.style.display =
+    "flex";
+
+
+    /* BUAT BANYAK HATI */
+
+    setInterval(function() {
+
+        const heart =
+        document.createElement("div");
+
+
+        heart.classList.add(
+        "heartEnd"
+        );
+
+
+        heart.innerHTML =
+        "💗";
+
+
+        heart.style.left =
+        Math.random() * 100 + "vw";
+
+
+        heart.style.fontSize =
+        Math.random() * 35 + 20 + "px";
+
+
+        penutup.appendChild(
+        heart
+        );
+
+
+        setTimeout(function() {
+
+            heart.remove();
+
+        }, 5000);
+
+
+    }, 250);
+
+}
+
+
+</script>
+
+</body>
+</html>
